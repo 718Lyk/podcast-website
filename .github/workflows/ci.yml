@@ -16,13 +16,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
-      # 失败时把 svelte-check 完整输出写入 Job Summary，便于在浏览器查看
+      # 失败时把 svelte-check 报错转成 annotation（API 可读）便于定位
       - run: |
           npm run check > check-output.log 2>&1 || {
-            echo "### svelte-check 失败输出" >> "$GITHUB_STEP_SUMMARY"
-            echo '```text' >> "$GITHUB_STEP_SUMMARY"
-            cat check-output.log >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            grep -E 'Error|Warn' check-output.log | head -40 | while IFS= read -r line; do
+              echo "::error::${line:0:600}"
+            done
             exit 1
           }
       - run: npm run build
