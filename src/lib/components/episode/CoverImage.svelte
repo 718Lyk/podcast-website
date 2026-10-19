@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { asset } from '$app/paths';
+	import type { AssetPath } from '$app/types';
 	import type { Episode } from '#lib/content/types';
 
 	let { episode, size = 'size-14' }: { episode: Episode; size?: string } = $props();
@@ -9,7 +11,7 @@
 
 {#if showImg}
 	<img
-		src={episode.cover}
+		src={asset(episode.cover.slice(1) as AssetPath)}
 		alt="第 {episode.number} 期《{episode.title}》封面"
 		width="256"
 		height="256"

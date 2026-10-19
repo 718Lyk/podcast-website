@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { asset, resolve } from '$app/paths';
+	import type { AssetPath } from '$app/types';
 	import { onMount } from 'svelte';
 	import { site } from '#lib/config/site';
+	import { absoluteUrl } from '#lib/utils/url';
 	import { formatDate, timestampToSeconds, durationToIso8601 } from '#lib/utils/format';
 	import { player } from '#lib/components/player/player.svelte';
 	import Seo from '#lib/components/seo/Seo.svelte';
@@ -37,18 +40,18 @@
 		'@type': 'PodcastEpisode',
 		name: episode.title,
 		description: episode.summary,
-		url: new URL(`/episodes/${episode.slug}`, site.url).href,
+		url: absoluteUrl(`/episodes/${episode.slug}`),
 		datePublished: episode.date,
 		timeRequired: durationToIso8601(episode.duration),
 		episodeNumber: episode.number,
 		partOfSeries: {
 			'@type': 'PodcastSeries',
 			name: site.name,
-			url: site.url
+			url: absoluteUrl('/')
 		},
 		associatedMedia: {
 			'@type': 'MediaObject',
-			contentUrl: episode.audioUrl,
+			contentUrl: absoluteUrl(episode.audioUrl),
 			encodingFormat: episode.audioType
 		},
 		actor: episode.guests.map((guest) => ({ '@type': 'Person', name: guest }))
@@ -64,7 +67,9 @@
 <JsonLd data={episodeJsonLd} />
 
 <nav class="mb-6 text-sm text-neutral-500 dark:text-neutral-400" aria-label="返回">
-	<a href="/episodes" class="hover:text-indigo-700 dark:hover:text-indigo-400">← 全部节目</a>
+	<a href={resolve('/episodes')} class="hover:text-indigo-700 dark:hover:text-indigo-400"
+		>← 全部节目</a
+	>
 </nav>
 
 <article>
@@ -120,7 +125,7 @@
 		{#if episode.audioUrl}
 			<p class="mt-2 text-xs text-neutral-400 dark:text-neutral-500">
 				无法播放？<a
-					href={episode.audioUrl}
+					href={asset(episode.audioUrl.slice(1) as AssetPath)}
 					class="underline hover:text-indigo-700 dark:hover:text-indigo-400">直接下载音频</a
 				>
 				或前往以下平台收听：
@@ -168,7 +173,7 @@
 	>
 		{#if prev}
 			<a
-				href="/episodes/{prev.slug}"
+				href={resolve('/episodes/[slug]', { slug: prev.slug })}
 				class="rounded-xl border border-neutral-200 bg-white p-4 transition hover:border-indigo-300 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-indigo-700"
 			>
 				<span class="text-xs text-neutral-500 dark:text-neutral-400"
@@ -183,7 +188,7 @@
 		{/if}
 		{#if next}
 			<a
-				href="/episodes/{next.slug}"
+				href={resolve('/episodes/[slug]', { slug: next.slug })}
 				class="rounded-xl border border-neutral-200 bg-white p-4 text-right transition hover:border-indigo-300 sm:col-start-2 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-indigo-700"
 			>
 				<span class="text-xs text-neutral-500 dark:text-neutral-400"

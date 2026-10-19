@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { favorites } from '#lib/components/favorites/favorites.svelte';
 	import { getEpisode } from '#lib/content/episodes';
 	import EpisodeCard from '#lib/components/episode/EpisodeCard.svelte';
@@ -22,7 +23,7 @@
 		class="mt-8 rounded-xl border border-dashed border-neutral-300 p-8 text-center text-neutral-500 dark:border-neutral-700 dark:text-neutral-400"
 	>
 		还没有收藏任何节目，去<a
-			href="/episodes"
+			href={resolve('/episodes')}
 			class="font-medium text-indigo-700 underline dark:text-indigo-400">节目列表</a
 		>逛逛吧
 	</p>

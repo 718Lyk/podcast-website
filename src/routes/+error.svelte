@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { resolve } from '$app/paths';
 	import Button from '#lib/components/ui/Button.svelte';
 </script>
 
@@ -10,7 +11,7 @@
 		{page.error?.message ?? '找不到你要访问的内容。'}
 	</p>
 	<div class="mt-6 flex justify-center gap-3">
-		<Button href="/">返回首页</Button>
-		<Button href="/episodes" variant="secondary">浏览节目</Button>
+		<Button href={resolve('/')}>返回首页</Button>
+		<Button href={resolve('/episodes')} variant="secondary">浏览节目</Button>
 	</div>
 </section>

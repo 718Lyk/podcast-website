@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { site } from '#lib/config/site';
 
 	const year = new Date().getFullYear();
@@ -14,8 +15,12 @@
 			<div
 				class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-500 dark:text-neutral-400"
 			>
-				<a href="/feed.xml" class="hover:text-indigo-700 dark:hover:text-indigo-400">RSS Feed</a>
-				<a href="/subscribe" class="hover:text-indigo-700 dark:hover:text-indigo-400">订阅指南</a>
+				<a href={resolve('/feed.xml')} class="hover:text-indigo-700 dark:hover:text-indigo-400"
+					>RSS Feed</a
+				>
+				<a href={resolve('/subscribe')} class="hover:text-indigo-700 dark:hover:text-indigo-400"
+					>订阅指南</a
+				>
 				<a
 					href="mailto:{site.contactEmail}"
 					class="hover:text-indigo-700 dark:hover:text-indigo-400">联系我们</a

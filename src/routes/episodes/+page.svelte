@@ -175,7 +175,7 @@
 			<p class="text-sm font-medium text-neutral-700 dark:text-neutral-300">没有找到匹配的节目</p>
 			<p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
 				试试更换关键词，或
-				<a href="/episodes" class="text-indigo-700 hover:underline dark:text-indigo-400"
+				<a href={resolve('/episodes')} class="text-indigo-700 hover:underline dark:text-indigo-400"
 					>清除全部筛选</a
 				>
 			</p>

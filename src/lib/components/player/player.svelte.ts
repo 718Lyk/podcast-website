@@ -1,4 +1,6 @@
 import type { Episode } from '#lib/content/types';
+import { asset } from '$app/paths';
+import type { AssetPath } from '$app/types';
 import { clearProgress, getProgress, savePref, saveProgress } from '#lib/utils/storage';
 
 /** 倍速档位（循环切换） */
@@ -37,7 +39,7 @@ class PlayerState {
 		this.duration = 0;
 		this.paused = false;
 
-		audio.src = episode.audioUrl;
+		audio.src = asset(episode.audioUrl.slice(1) as AssetPath);
 		audio.playbackRate = this.rate;
 
 		// 恢复上次播放进度（超过 30 秒才恢复）

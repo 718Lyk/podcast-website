@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { site } from '#lib/config/site';
+	import { absoluteUrl } from '#lib/utils/url';
 	import Seo from '#lib/components/seo/Seo.svelte';
 	import PlatformLinks from '#lib/components/episode/PlatformLinks.svelte';
 
-	const feedUrl = new URL('/feed.xml', site.url).href;
+	const feedUrl = absoluteUrl('/feed.xml');
 
 	let copied = $state(false);
 

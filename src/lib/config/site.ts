@@ -7,7 +7,8 @@ export const site = {
 	slogan: '聊前端、AI 与开源的中文技术播客',
 	description:
 		'Web Worker 是一档面向前端工程师与泛程序员的中文播客，话题覆盖前端工程化、AI、开源社区与程序员职业发展。',
-	url: 'https://podcast.webworker.fm',
+	/** 站点完整地址（含子路径）；须与 vite.config.ts 的 paths.base 保持一致 */
+	url: 'https://718lyk.github.io/podcast-website',
 	lang: 'zh-CN',
 	author: 'Web Worker 团队',
 	contactEmail: 'hi@webworker.fm',

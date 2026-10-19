@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { Episode } from '#lib/content/types';
 	import { formatDate } from '#lib/utils/format';
 	import { player } from '#lib/components/player/player.svelte';
@@ -15,7 +16,11 @@
 <article
 	class="group flex gap-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition hover:shadow-md sm:gap-5 sm:p-5 dark:border-neutral-800 dark:bg-neutral-900"
 >
-	<a href="/episodes/{episode.slug}" class="shrink-0" aria-label="查看第 {episode.number} 期详情">
+	<a
+		href={resolve('/episodes/[slug]', { slug: episode.slug })}
+		class="shrink-0"
+		aria-label="查看第 {episode.number} 期详情"
+	>
 		<CoverImage {episode} size={featured ? 'size-20 sm:size-28' : 'size-16 sm:size-20'} />
 	</a>
 
@@ -38,7 +43,7 @@
 				? 'text-lg sm:text-xl'
 				: 'text-base'}"
 		>
-			<a href="/episodes/{episode.slug}">{episode.title}</a>
+			<a href={resolve('/episodes/[slug]', { slug: episode.slug })}>{episode.title}</a>
 		</h3>
 
 		{#if featured || episode.summary}

@@ -1,19 +1,22 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
 	import { site } from '#lib/config/site';
 	import { theme } from '#lib/components/theme/theme.svelte';
 
+	// resolve() 自动补部署子路径（paths.base），内部链接一律经它生成
+	const home = resolve('/');
 	const navItems = [
-		{ href: '/', label: '首页' },
-		{ href: '/episodes', label: '节目' },
-		{ href: '/favorites', label: '收藏' },
-		{ href: '/subscribe', label: '订阅' },
-		{ href: '/about', label: '关于' }
-	] as const;
+		{ href: home, label: '首页' },
+		{ href: resolve('/episodes'), label: '节目' },
+		{ href: resolve('/favorites'), label: '收藏' },
+		{ href: resolve('/subscribe'), label: '订阅' },
+		{ href: resolve('/about'), label: '关于' }
+	];
 
 	const isActive = (href: string) =>
-		href === '/' ? page.url.pathname === '/' : page.url.pathname.startsWith(href);
+		href === home ? page.url.pathname === home : page.url.pathname.startsWith(href);
 
 	onMount(() => theme.init());
 </script>
@@ -22,7 +25,7 @@
 	<div
 		class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3 sm:px-6"
 	>
-		<a href="/" class="flex items-center gap-2.5">
+		<a href={home} class="flex items-center gap-2.5">
 			<span
 				class="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-700 text-sm font-bold text-white"
 				aria-hidden="true"
@@ -54,7 +57,7 @@
 				{/each}
 				<li class="hidden sm:block">
 					<a
-						href="/feed.xml"
+						href={resolve('/feed.xml')}
 						class="rounded-full p-2 text-neutral-500 transition hover:bg-neutral-100 hover:text-indigo-700 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-indigo-400"
 						aria-label="RSS 订阅"
 						title="RSS 订阅"

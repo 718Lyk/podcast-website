@@ -1,5 +1,6 @@
 import { getEpisodes } from '#lib/content/episodes';
 import { site } from '#lib/config/site';
+import { absoluteUrl } from '#lib/utils/url';
 
 export const prerender = true;
 
@@ -16,7 +17,7 @@ function escapeXml(value: string): string {
 export function GET(): Response {
 	const items = getEpisodes()
 		.map((episode) => {
-			const link = `${site.url}/episodes/${episode.slug}`;
+			const link = absoluteUrl(`/episodes/${episode.slug}`);
 			return `    <item>
       <title>${escapeXml(episode.title)}</title>
       <link>${escapeXml(link)}</link>
@@ -26,8 +27,8 @@ export function GET(): Response {
       <itunes:summary>${escapeXml(episode.summary)}</itunes:summary>
       <itunes:duration>${escapeXml(episode.duration)}</itunes:duration>
       <itunes:episode>${episode.number}</itunes:episode>
-      <itunes:image href="${escapeXml(new URL(episode.cover, site.url).href)}"/>
-      <enclosure url="${escapeXml(episode.audioUrl)}" type="${escapeXml(episode.audioType)}" length="${episode.audioSize}"/>
+      <itunes:image href="${escapeXml(absoluteUrl(episode.cover))}"/>
+      <enclosure url="${escapeXml(absoluteUrl(episode.audioUrl))}" type="${escapeXml(episode.audioType)}" length="${episode.audioSize}"/>
     </item>`;
 		})
 		.join('\n');
@@ -36,8 +37,8 @@ export function GET(): Response {
 <rss version="2.0" xmlns:itunes="https://podcasts.apple.com/au/summary" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(site.name)}</title>
-    <link>${escapeXml(site.url)}</link>
-    <atom:link href="${escapeXml(new URL('/feed.xml', site.url).href)}" rel="self" type="application/rss+xml"/>
+    <link>${escapeXml(absoluteUrl('/'))}</link>
+    <atom:link href="${escapeXml(absoluteUrl('/feed.xml'))}" rel="self" type="application/rss+xml"/>
     <language>${site.lang}</language>
     <description>${escapeXml(site.description)}</description>
     <itunes:author>${escapeXml(site.author)}</itunes:author>

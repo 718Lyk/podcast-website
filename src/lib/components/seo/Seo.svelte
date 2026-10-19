@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { site } from '#lib/config/site';
+	import { absoluteUrl } from '#lib/utils/url';
 
 	let {
 		title,
@@ -10,7 +11,7 @@
 	}: { title: string; description?: string; path?: string; image?: string } = $props();
 
 	const fullTitle = $derived(title === site.name ? title : `${title} | ${site.name}`);
-	const url = $derived(new URL(path, site.url).href);
+	const url = $derived(absoluteUrl(path));
 </script>
 
 <svelte:head>
@@ -25,7 +26,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:locale" content={site.lang} />
 	{#if image}
-		<meta property="og:image" content={new URL(image, site.url).href} />
+		<meta property="og:image" content={absoluteUrl(image)} />
 	{/if}
 
 	<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://718lyk.github.io/podcast-website/sitemap.xml

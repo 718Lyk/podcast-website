@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { getEpisodes } from '#lib/content/episodes';
 	import { site } from '#lib/config/site';
+	import { absoluteUrl } from '#lib/utils/url';
 	import Seo from '#lib/components/seo/Seo.svelte';
 	import JsonLd from '#lib/components/seo/JsonLd.svelte';
 	import EpisodeCard from '#lib/components/episode/EpisodeCard.svelte';
@@ -30,7 +32,7 @@
 		'@type': 'PodcastSeries',
 		name: site.name,
 		description: site.description,
-		url: site.url,
+		url: absoluteUrl('/'),
 		inLanguage: site.lang,
 		author: hosts.map((host) => ({ '@type': 'Person', name: host.name }))
 	};
@@ -75,7 +77,7 @@
 				收听最新一期
 			</a>
 			<a
-				href="/subscribe"
+				href={resolve('/subscribe')}
 				class="rounded-full border border-white/40 px-5 py-2.5 text-sm font-medium text-white transition hover:border-white hover:bg-white/10"
 			>
 				订阅指南
@@ -95,8 +97,9 @@
 			<h2 id="latest-heading" class="text-lg font-bold text-neutral-900 dark:text-neutral-100">
 				最新一期
 			</h2>
-			<a href="/episodes" class="text-sm text-indigo-700 hover:underline dark:text-indigo-400"
-				>全部节目 →</a
+			<a
+				href={resolve('/episodes')}
+				class="text-sm text-indigo-700 hover:underline dark:text-indigo-400">全部节目 →</a
 			>
 		</div>
 		<div class="mt-4">
@@ -118,7 +121,7 @@
 		</div>
 		<div class="mt-6 text-center">
 			<a
-				href="/episodes"
+				href={resolve('/episodes')}
 				class="inline-block rounded-full border border-neutral-300 bg-white px-5 py-2 text-sm font-medium text-neutral-700 transition hover:border-indigo-300 hover:text-indigo-700 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:border-indigo-700 dark:hover:text-indigo-400"
 			>
 				浏览全部 {episodes.length} 期节目
@@ -132,10 +135,11 @@
 	<div class="flex items-center justify-between">
 		<h2 id="hosts-heading" class="text-lg font-bold text-neutral-900 dark:text-neutral-100">
 			关于主播
+			<a
+				href={resolve('/about')}
+				class="text-sm text-indigo-700 hover:underline dark:text-indigo-400">了解更多 →</a
+			>
 		</h2>
-		<a href="/about" class="text-sm text-indigo-700 hover:underline dark:text-indigo-400"
-			>了解更多 →</a
-		>
 	</div>
 	<div class="mt-4 grid gap-4 sm:grid-cols-2">
 		{#each hosts as host (host.name)}
@@ -172,13 +176,14 @@
 	</p>
 	<div class="mt-4 flex flex-wrap items-center gap-3">
 		<a
-			href="/subscribe"
+			href={resolve('/subscribe')}
 			class="rounded-full bg-indigo-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-indigo-500"
 		>
 			查看订阅指南
 		</a>
-		<a href="/feed.xml" class="text-sm text-indigo-700 hover:underline dark:text-indigo-400"
-			>直接复制 RSS 地址</a
+		<a
+			href={resolve('/feed.xml')}
+			class="text-sm text-indigo-700 hover:underline dark:text-indigo-400">直接复制 RSS 地址</a
 		>
 	</div>
 </section>

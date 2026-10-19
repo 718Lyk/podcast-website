@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { player } from './player.svelte';
 	import ProgressBar from './ProgressBar.svelte';
 	import CoverImage from '#lib/components/episode/CoverImage.svelte';
@@ -12,7 +13,7 @@
 	>
 		<div class="mx-auto flex max-w-5xl items-center gap-3 px-3 py-2 sm:gap-4 sm:px-6 sm:py-3">
 			<a
-				href="/episodes/{player.current.slug}"
+				href={resolve('/episodes/[slug]', { slug: player.current.slug })}
 				class="shrink-0"
 				aria-label="查看节目详情"
 				onclick={() => player.close()}

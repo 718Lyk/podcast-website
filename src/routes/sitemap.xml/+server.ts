@@ -1,5 +1,5 @@
 import { getEpisodes } from '#lib/content/episodes';
-import { site } from '#lib/config/site';
+import { absoluteUrl } from '#lib/utils/url';
 
 export const prerender = true;
 
@@ -12,13 +12,13 @@ export function GET(): Response {
 	const urls = [
 		...staticPages.map(
 			(path) => `  <url>
-    <loc>${new URL(path, site.url).href}</loc>
+    <loc>${absoluteUrl(path)}</loc>
     <lastmod>${lastmod}</lastmod>
   </url>`
 		),
 		...episodes.map(
 			(episode) => `  <url>
-    <loc>${new URL(`/episodes/${episode.slug}`, site.url).href}</loc>
+    <loc>${absoluteUrl(`/episodes/${episode.slug}`)}</loc>
     <lastmod>${episode.date}</lastmod>
   </url>`
 		)
