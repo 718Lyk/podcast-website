@@ -1,0 +1,55 @@
+@import 'tailwindcss';
+
+/* 深色模式采用 class 策略：app.html 内联脚本在首帧前给 <html> 挂 .dark，避免闪烁 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+	@apply bg-neutral-50 text-neutral-900 antialiased transition-colors dark:bg-neutral-950 dark:text-neutral-100;
+}
+
+html.dark {
+	color-scheme: dark;
+}
+
+/* ── Shownotes 正文排版（详情页 Markdown 渲染结果）────────────── */
+
+.prose-podcast {
+	@apply text-[15px] leading-7 text-neutral-700 dark:text-neutral-300;
+}
+.prose-podcast h2 {
+	@apply mt-8 mb-3 text-lg font-bold text-neutral-900 dark:text-neutral-100;
+}
+.prose-podcast h3 {
+	@apply mt-6 mb-2 text-base font-semibold text-neutral-900 dark:text-neutral-100;
+}
+.prose-podcast p {
+	@apply my-3;
+}
+.prose-podcast ul {
+	@apply my-3 list-disc space-y-1.5 pl-5;
+}
+.prose-podcast ol {
+	@apply my-3 list-decimal space-y-1.5 pl-5;
+}
+.prose-podcast a {
+	@apply text-indigo-700 underline decoration-indigo-200 underline-offset-2 hover:decoration-indigo-500 dark:text-indigo-400 dark:decoration-indigo-800;
+}
+.prose-podcast blockquote {
+	@apply my-3 border-l-4 border-indigo-200 bg-indigo-50/50 py-1 pl-4 text-neutral-600 dark:border-indigo-800 dark:bg-indigo-950/40 dark:text-neutral-400;
+}
+.prose-podcast code {
+	@apply rounded bg-neutral-100 px-1 py-0.5 font-mono text-sm text-pink-700 dark:bg-neutral-800 dark:text-pink-400;
+}
+.prose-podcast pre {
+	@apply my-3 overflow-x-auto rounded-lg bg-neutral-900 p-4 text-sm text-neutral-100;
+}
+.prose-podcast pre code {
+	@apply bg-transparent p-0 text-inherit;
+}
+.prose-podcast hr {
+	@apply my-6 border-neutral-200 dark:border-neutral-800;
+}
+/* 正文中的时间戳 → 章节跳转按钮（事件委托在详情页容器上） */
+.prose-podcast .chapter-seek {
+	@apply mx-0.5 inline-flex cursor-pointer items-baseline rounded bg-indigo-50 px-1.5 font-mono text-[13px] font-medium text-indigo-700 transition hover:bg-indigo-100 dark:bg-indigo-950/60 dark:text-indigo-400 dark:hover:bg-indigo-900/60;
+}

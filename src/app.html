@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="text-scale" content="scale" />
+		<!-- 深色模式：首帧前根据 localStorage 或系统偏好挂 .dark 类，避免闪烁 -->
+		<script>
+			(() => {
+				try {
+					const t = localStorage.getItem('ww:theme');
+					if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches))
+						document.documentElement.classList.add('dark');
+				} catch {
+					/* 隐私模式下忽略 */
+				}
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

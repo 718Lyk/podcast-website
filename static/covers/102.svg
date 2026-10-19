@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="640" rx="48" fill="url(#g)"/>
+  <text x="64" y="140" font-family="system-ui, sans-serif" font-size="40" font-weight="700" fill="#bae6fd">WEB WORKER 播客</text>
+  <text x="64" y="330" font-family="system-ui, sans-serif" font-size="150" font-weight="800" fill="#ffffff">No.102</text>
+  <text x="64" y="430" font-family="system-ui, sans-serif" font-size="42" font-weight="600" fill="#dbeafe">从 Malagu 到 CodeBuddy</text>
+  <text x="64" y="500" font-family="system-ui, sans-serif" font-size="42" font-weight="600" fill="#dbeafe">AI 时代的研发与管理</text>
+  <text x="64" y="580" font-family="system-ui, sans-serif" font-size="28" fill="#93c5fd">聊前端、AI 与开源的中文技术播客</text>
+</svg>
